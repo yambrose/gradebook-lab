@@ -1,1 +1,72 @@
 /* src/css/spreadsheet.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #F2F2F2;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    background: #FFFFFF;
+    border-radius: 0.5rem;
+    margin: 2rem 10rem 2rem 10rem;
+    border: #A7A7A7 1px solid;
+}
+
+section h1 {
+    font-size: 2rem;
+    color: #040519;
+    margin-bottom: 1rem;
+}
+
+.inner {
+
+}
+
+/* Summary Row */
+#summary-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#summary-row > div {
+    background: #F2F2F2;
+    border: #C5C5C5 1px solid;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    flex: 1;
+}
+
+/* Header */
+header {
+    padding: 1rem;
+    background: #040519;
+}
+header h1 {
+    font-size: 3rem;
+    color: #F8F8F8;
+}
+
+header .subtitle {
+    font-size: 1.25rem;
+    color: #F8F8F8;
+}
+
+/* Summary */
+
+/* Media Queries */
+@media (max-width: 1000px) {
+    section {
+        margin: 2rem 1rem 2rem 1rem;
+    }
+}
