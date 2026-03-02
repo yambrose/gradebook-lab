@@ -93,7 +93,8 @@ tr {
     background: #F8F8F8;
 }
 
-.student-name {
+.selected {
+    background: #e0e0ff;
 }
 
 /* Media Queries */
