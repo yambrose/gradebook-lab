@@ -14,7 +14,7 @@ function fillTableData() {
     // Fill header
     const headerRow = $("#header-row");
     for (let i = 0; i < testData.headers.length; i++) {
-        const header = $(`<th>${testData.headers[i]}</th>`);
+        const header = $(`<th class=col-"${i}">${testData.headers[i-1]}</th>`);  // TODO fix this -1 is too hacky
         if (i > 0) { header.on("click", selectCol) }
         headerRow.append(header);
 
@@ -27,7 +27,7 @@ function fillTableData() {
         tableBody.append(
             `<tr>
                 <td class="student-name">${student}</td>
-                ${grades.map((grade) => `<td class="grade-cell">${grade}</td>`).join("")}
+                ${grades.map((grade, index) => `<td class="col-${index} row-${i}">${grade}</td>`).join("")}
             </tr>
         `)
         $(`tr:last-child .student-name`).on("click", selectRow);
