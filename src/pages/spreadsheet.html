@@ -2,68 +2,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gradebook Explorer</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gradebook Explorer</title>
 
-  <!-- Lab CS -->
-  <link rel="stylesheet" href="../css/spreadsheet.css" />
+    <!-- Lab CS -->
+    <link rel="stylesheet" href="../css/spreadsheet.css"/>
 
-  <!-- jQuery (Lab 05) -->
-  <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <!-- jQuery (Lab 05) -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
 
-  <!-- D3 (Lab 06) -->
-  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-  
-  <!-- Lab JS -->
-  <script src="../js/gradebook.js" defer></script>
-  <script src="../js/chart.js" defer></script>
-  <script src="../js/spreadsheet.js" defer></script>
-  
+    <!-- D3 (Lab 06) -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+    <!-- Lab JS -->
+    <script src="../js/gradebook.js" defer></script>
+    <script src="../js/chart.js" defer></script>
+    <script src="../js/spreadsheet.js" defer></script>
+
 </head>
 
 <body>
-  <header class="page-header">
+<header class="page-header">
     <h1>Gradebook Explorer</h1>
     <p class="subtitle">
-      Explore a gradebook by selecting rows/columns, editing marks, and visualizing grade distributions.
+        Explore a gradebook by selecting rows/columns, editing marks, and visualizing grade distributions.
     </p>
-  </header>
+</header>
 
-  <section>
+<section>
     <h1>Selection Summary</h1>
-    <div id="summary-row" class="inner">
-      <div>
-        <label>Selected</label>
-        <p>None: -</p>
-      </div>
-      <div>
-        <label>Selected</label>
-        <p>None: -</p>
-      </div>
-      <div>
-        <label>Selected</label>
-        <p>None: -</p>
-      </div>
-      <div>
-        <label>Selected</label>
-        <p>None: -</p>
-      </div>
-      <div>
-        <label>Selected</label>
-        <p>None: -</p>
-      </div>
+    <div id="summary-row">
+        <div class="inner">
+            <label>Selected</label>
+            <p>None: -</p>
+        </div>
+        <div class="inner">
+            <label>Count</label>
+            <p>0</p>
+        </div>
+        <div class="inner">
+            <label>Mean</label>
+            <p>-</p>
+        </div>
+        <div class="inner">
+            <label>Min</label>
+            <p>None: -</p>
+        </div>
+        <div class="inner">
+            <label>Max</label>
+            <p>None: -</p>
+        </div>
     </div>
     <div class="inner">
-
+        s
     </div>
-  </section>
+</section>
 
-  <section>
+<section>
+    <h1>Gradebook</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Student</th>
+            <th>Lab 1</th>
+            <th>Lab 2</th>
+            <th>Lab 3</th>
+            <th>Midterm</th>
+            <th>Final</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>Student 1</td>
+            <td>85</td>
+            <td>90</td>
+            <td>80</td>
+            <td>88</td>
+            <td>92</td>
+        </tr>
+    </table>
+</section>
 
-  </section>
-
-  <!-- Spreadsheet here -->
+<!-- Spreadsheet here -->
 
 </body>
 </html>
