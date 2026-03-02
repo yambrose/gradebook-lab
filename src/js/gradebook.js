@@ -65,13 +65,17 @@ function selectCol(colId) {
 
 function updateSummary() {
     const data = readSelectedData();
-    console.log(data)
-    const mean = data.reduce((a, b) => a+b, 0)/data.length;
-    const min = Math.min(data);
-    const max = Math.max(data);
+    const hasSelection = data && data.length > 0;
 
+    const mean = hasSelection ? (data.reduce((a, b) => a+b, 0)/data.length).toFixed(2) : 0;
+    const min = hasSelection ? Math.min(...data).toFixed(2) : 0;
+    const max = hasSelection ? Math.max(...data).toFixed(2) : 0;
+
+    $("selected")
     $("#count").text(data.length);
-    $("#mean").text(mean.toFixed(2));
+    $("#mean").text(mean > 0 ? mean : 0);
+    $("#min").text(min > 0 ? min : "-");
+    $("#max").text(max > 0 ? max : "-");
 
 }
 
