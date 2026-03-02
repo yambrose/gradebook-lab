@@ -30,7 +30,7 @@ function fillTableData() {
                 ${grades.map((grade, index) => `<td class="col-${index} row-${i}">${grade}</td>`).join("")}
             </tr>
         `)
-        $(`tr:last-child .student-name`).on("click", selectRow);
+        $(`tr:last-child .student-name`).on("click",() => selectRow(i));
     }
 }
 
@@ -39,8 +39,14 @@ function readSelectedData() {
     console.log(selected);
 }
 
-function selectRow() {
-    console.log("asdad")
+function deselectAll() {
+    $(".selected").removeClass("selected");
+}
+
+function selectRow(rowId) {
+    console.log(`Selecting row ${rowId}.`);
+    deselectAll();
+    $(`.row-${rowId}`).addClass("selected");
 }
 
 function selectCol() {
