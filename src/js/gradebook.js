@@ -3,6 +3,9 @@
 
 const table = $("#grades-table");
 const tableBody = $("#table-body");
+
+let selectedDirection = null;
+let selectedName = null;
 let isEditing = false;
 
 const testData = {
@@ -55,6 +58,9 @@ function selectRow(rowId) {
     console.log(`Selecting row ${rowId}.`);
     deselectAll();
     $(`.row-${rowId}`).addClass("selected");
+
+    selectedDirection = "Row";
+    selectedName = testData.students[rowId];
     updateSummary("Row", testData.students[rowId]);
 }
 
@@ -62,10 +68,12 @@ function selectColumn(colId) {
     console.log(`Selecting column ${colId}.`);
     deselectAll();
     $(`.col-${colId}`).addClass("selected");
-    updateSummary("Column", testData.headers[colId+1]);
+    selectedDirection = "Column";
+    selectedName = testData.headers[colId+1];
+    updateSummary();
 }
 
-function updateSummary(direction, selectedName) {
+function updateSummary() {
     const data = readSelectedData();
     const hasSelection = data && data.length > 0;
 
@@ -73,7 +81,7 @@ function updateSummary(direction, selectedName) {
     const min = hasSelection ? Math.min(...data).toFixed(2) : 0;
     const max = hasSelection ? Math.max(...data).toFixed(2) : 0;
 
-    $("#selected").text(`${direction}: ${selectedName}`)
+    $("#selected").text(`${selectedDirection}: ${selectedName}`)
     $("#count").text(data.length);
     $("#mean").text(mean > 0 ? mean : 0);
     $("#min").text(min > 0 ? min : "-");
@@ -85,10 +93,11 @@ function updateCell() {
 
 }
 
-function updateCell(newValue, originalValue) {
+function updateCell(cell, newValue, originalValue) {
     if (/^\d+$/.test(newValue) && newValue !== originalValue) {
-        //update the data and the csv
+        cell.text(newValue);
     }
+    updateSummary();
 }
 
 
@@ -103,9 +112,8 @@ function editCell() {
     input.on("keydown", (e) => {
         const newValue = input.val().trim();
         if (e.key === "Enter") {
-            updateCell(newValue, originalValue);
+            updateCell(cell, newValue, originalValue);
             $("#edit-input").remove();
-            cell.text(newValue);
             isEditing = false;
         }
     });
