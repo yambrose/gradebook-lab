@@ -14,10 +14,9 @@ function fillTableData() {
     // Fill header
     const headerRow = $("#header-row");
     for (let i = 0; i < testData.headers.length; i++) {
-        const header = $(`<th class=col-"${i}">${testData.headers[i-1]}</th>`);  // TODO fix this -1 is too hacky
-        if (i > 0) { header.on("click", selectCol) }
+        const header = $(`<th>${testData.headers[i]}</th>`);
+        if (i > 0) { header.on("click", () => selectCol(i-1)) }  // -1 because Student header shouldn't count
         headerRow.append(header);
-
     }
 
     // Fill body
@@ -35,7 +34,7 @@ function fillTableData() {
 }
 
 function readSelectedData() {
-    const selected = $(".selected").get();
+    const selected = $(".selected").toArray().map((item) => item.textContent);
     console.log(selected);
 }
 
@@ -47,10 +46,14 @@ function selectRow(rowId) {
     console.log(`Selecting row ${rowId}.`);
     deselectAll();
     $(`.row-${rowId}`).addClass("selected");
+    readSelectedData();
 }
 
-function selectCol() {
-    console.log("asdad")
+function selectCol(colId) {
+    console.log(`Selecting column ${colId}.`);
+    deselectAll();
+    $(`.col-${colId}`).addClass("selected");
+    readSelectedData();
 }
 
 function editCell() {
