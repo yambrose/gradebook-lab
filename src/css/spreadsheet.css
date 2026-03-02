@@ -97,6 +97,11 @@ tr {
     background: #e0e0ff;
 }
 
+.clickable:hover {
+    cursor: pointer;
+    background: #dfdfdf;
+}
+
 /* Media Queries */
 @media (max-width: 1000px) {
     section {
