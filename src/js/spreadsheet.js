@@ -58,6 +58,7 @@ function selectRow(rowId, data) {
     selectedDirection = "Row";
     selectedName = data.students[rowId];
     updateSummary("Row", data.students[rowId]);
+    buildNewGraph("Letter Grade", "Frequency", readSelectedData());
 }
 
 function selectColumn(colId, data) {
@@ -67,6 +68,7 @@ function selectColumn(colId, data) {
     selectedDirection = "Column";
     selectedName = data.headers[colId+1];
     updateSummary();
+    buildNewGraph("Letter Grade", "Frequency", readSelectedData());
 }
 
 function updateSummary() {
