@@ -114,6 +114,17 @@ td {
     background: #dfdfdf;
 }
 
+/* Graph */
+.bar {
+    fill: #4A90E2;
+}
+
+.axis text {
+    font-size: 0.75rem;
+    fill: #333333;
+}
+
+
 /* Media Queries */
 @media (max-width: 1000px) {
     section {
