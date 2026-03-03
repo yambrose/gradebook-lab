@@ -33,7 +33,7 @@ function buildNewGraph(xLab, yLab, data) {
 
     const container = $("#chart")[0];
     const width = container.clientWidth;
-    const height = 300;
+    const height = 350;
     const margin = { top: 20, right: 30, bottom: 40, left: 50 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
