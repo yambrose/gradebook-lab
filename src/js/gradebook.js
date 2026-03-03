@@ -70,6 +70,8 @@ function readSelectedData() {
 }
 
 function deselectAll() {
+    selectedDirection = null;
+    selectedName = null;
     $(".selected").removeClass("selected");
 }
 
@@ -139,7 +141,7 @@ function editCell() {
         }
     });
     input.val(originalValue);
-    cell.text("").append(input);
+    cell.append(input);
     input.focus();
 }
 
@@ -150,3 +152,9 @@ function writeDataToCSV() {
 
 
 readDataFromCSV();
+
+/*
+* CURRENT PROBLEMS
+* 1. Selection Count subtracts by 1 when editing a cell within the selection range
+*
+* */
