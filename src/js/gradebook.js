@@ -111,8 +111,12 @@ function updateSummary() {
 }
 
 function updateCell(cell, newValue, originalValue) {
-    if (/^\d+$/.test(newValue) && newValue !== originalValue && newValue.length > 0) {
-        cell.text(newValue);
+    if (/^\d+(?:\.+\d*)?$/.test(newValue) &&
+        newValue.length > 0 &&
+        parseFloat(newValue) >= 0 &&
+        newValue !== originalValue
+    ) {
+        cell.text(parseFloat(newValue));
     } else {
         cell.text(originalValue);
     }
