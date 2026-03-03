@@ -93,6 +93,17 @@ tr {
     background: #F8F8F8;
 }
 
+td {
+    position: relative;
+}
+
+#edit-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 .selected {
     background: #e0e0ff;
 }
