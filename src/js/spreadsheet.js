@@ -13,10 +13,11 @@ function fillTableData(data) {
     // Fill header
     const headerRow = $("#header-row");
     for (let i = 0; i < data.headers.length; i++) {
-        const header = $(`<th>${data.headers[i]}</th>`);
+        const header = $(`<th class="clickable">${data.headers[i]}</th>`);
         if (i > 0) {
-            header.on("click", () => selectColumn(i - 1, data)) // -1 because Student header shouldn't count
-            header.addClass("clickable")
+            header.attr("tabindex", 0)
+                .on("click", () => selectColumn(i - 1, data)) // -1 because Student header shouldn't count
+                .on("blur", deselectAll);
         }
         headerRow.append(header);
     }
@@ -32,7 +33,9 @@ function fillTableData(data) {
             </tr>
         `)
         $(`tr:last-child .cell`).on("click", editCell);
-        $(`tr:last-child .student-name`).on("click", () => selectRow(i, data));
+        $(`tr:last-child .student-name`).attr("tabindex", 0)
+            .on("click", () => selectRow(i, data))
+            .on("blur", deselectAll);
     }
 }
 
@@ -49,11 +52,11 @@ function deselectAll() {
     selectedName = null;
     $(".selected").removeClass("selected");
     removeInput();
+    d3.select("#chart").selectAll("*").remove();
 }
 
 function selectRow(rowId, data) {
     console.log(`Selecting row ${rowId}.`);
-    deselectAll();
     $(`.row-${rowId}`).addClass("selected");
 
     selectedDirection = "Row";
@@ -64,7 +67,6 @@ function selectRow(rowId, data) {
 
 function selectColumn(colId, data) {
     console.log(`Selecting column ${colId}.`);
-    deselectAll();
     $(`.col-${colId}`).addClass("selected");
     selectedDirection = "Column";
     selectedName = data.headers[colId + 1];
@@ -119,16 +121,13 @@ function editCell() {
     const cell = $(this);
     const originalValue = cell.text();
     const input = $("<input type='tel' id='edit-input'>")
-
-    input.on("keydown", (e) => {
-        const newValue = input.val().trim();
-        if (e.key === "Enter") {
-            updateCell(cell, newValue, originalValue);
-        }
-    });
-    input.val(originalValue);
-    cell.append(input);
-    input.focus();
+        .val(originalValue)
+        .on("blur", function() { updateCell(cell, this.value.trim(), originalValue); })
+        .on("keydown", function(e) {
+            if (e.key === "Enter") updateCell(cell, this.value.trim(), originalValue);
+        })
+        .appendTo(cell)
+        .focus();
 }
 
 
