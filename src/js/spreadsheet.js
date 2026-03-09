@@ -15,7 +15,7 @@ function fillTableData(data) {
     for (let i = 0; i < data.headers.length; i++) {
         const header = $(`<th>${data.headers[i]}</th>`);
         if (i > 0) {
-            header.on("click", () => selectColumn(i-1, data)) // -1 because Student header shouldn't count
+            header.on("click", () => selectColumn(i - 1, data)) // -1 because Student header shouldn't count
             header.addClass("clickable")
         }
         headerRow.append(header);
@@ -32,7 +32,7 @@ function fillTableData(data) {
             </tr>
         `)
         $(`tr:last-child .cell`).on("click", editCell);
-        $(`tr:last-child .student-name`).on("click",() => selectRow(i, data));
+        $(`tr:last-child .student-name`).on("click", () => selectRow(i, data));
     }
 }
 
@@ -41,7 +41,7 @@ function readSelectedData() {
         if (/^\d+/.test(item.textContent)) {
             return parseFloat(item.textContent);
         }
-    }).filter(Boolean);
+    }).filter((item) => item !== undefined);
 }
 
 function deselectAll() {
@@ -66,7 +66,7 @@ function selectColumn(colId, data) {
     deselectAll();
     $(`.col-${colId}`).addClass("selected");
     selectedDirection = "Column";
-    selectedName = data.headers[colId+1];
+    selectedName = data.headers[colId + 1];
     updateSummary();
     buildNewGraph("Letter Grade", "Frequency", readSelectedData());
 }
@@ -75,7 +75,7 @@ function updateSummary() {
     const selected = readSelectedData();
     const hasSelection = selected && selected.length > 0;
 
-    const mean = hasSelection ? (selected.reduce((a, b) => a+b, 0)/selected.length).toFixed(2) : 0;
+    const mean = hasSelection ? (selected.reduce((a, b) => a + b, 0) / selected.length).toFixed(2) : 0;
     const min = hasSelection ? Math.min(...selected).toFixed(2) : 0;
     const max = hasSelection ? Math.max(...selected).toFixed(2) : 0;
 
@@ -97,7 +97,11 @@ function updateCell(cell, newValue, originalValue) {
     } else {
         cell.text(originalValue);
     }
-    updateSummary();
+
+    if (selectedDirection) {
+        updateSummary();
+        buildNewGraph("Letter Grade", "Frequency", readSelectedData());
+    }
 }
 
 function editCell() {
@@ -111,11 +115,15 @@ function editCell() {
         const newValue = input.val().trim();
         if (e.key === "Enter") {
             updateCell(cell, newValue, originalValue);
-            $("#edit-input").remove();
             isEditing = false;
+            input.remove();
         }
     });
     input.val(originalValue);
     cell.append(input);
     input.focus();
 }
+
+
+
+// TODO: chart doesn't update on window resize

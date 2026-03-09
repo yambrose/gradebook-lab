@@ -1,6 +1,8 @@
 // src/js/gradebook.js
 // Data + parsing + utilities for Gradebook Explorer
 
+const GRADES_URL = "http://localhost:8000/src/data/grades.csv";
+
 async function readDataFromCSV() {
     let updatedData = {
         headers: [],
@@ -8,7 +10,7 @@ async function readDataFromCSV() {
         grades: []
     };
 
-    await fetch("http://localhost:8000/src/data/grades.csv")
+    await fetch(GRADES_URL)
         .then(response => response.text())
         .then(data => data.trim().split('\n').map((row) => row.split(',')))
         .then(data => {

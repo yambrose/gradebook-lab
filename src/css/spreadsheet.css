@@ -115,6 +115,14 @@ td {
 }
 
 /* Graph */
+#chart {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .bar {
     fill: #040519;
 }
