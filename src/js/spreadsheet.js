@@ -48,6 +48,7 @@ function deselectAll() {
     selectedDirection = null;
     selectedName = null;
     $(".selected").removeClass("selected");
+    removeInput();
 }
 
 function selectRow(rowId, data) {
@@ -88,6 +89,7 @@ function updateSummary() {
 }
 
 function updateCell(cell, newValue, originalValue) {
+    if (!isEditing) return;
     if (/^\d+(?:\.+\d*)?$/.test(newValue) &&
         newValue.length > 0 &&
         parseFloat(newValue) >= 0 &&
@@ -102,6 +104,13 @@ function updateCell(cell, newValue, originalValue) {
         updateSummary();
         buildNewGraph("Letter Grade", "Frequency", readSelectedData());
     }
+
+    removeInput();
+}
+
+function removeInput() {
+    $('#edit-input').remove();
+    isEditing = false;
 }
 
 function editCell() {
@@ -115,8 +124,6 @@ function editCell() {
         const newValue = input.val().trim();
         if (e.key === "Enter") {
             updateCell(cell, newValue, originalValue);
-            isEditing = false;
-            input.remove();
         }
     });
     input.val(originalValue);
