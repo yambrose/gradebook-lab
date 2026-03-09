@@ -32,7 +32,7 @@ function fillTableData(data) {
                 ${grades.map((grade, index) => `<td class="col-${index} row-${i} cell">${grade}</td>`).join("")}
             </tr>
         `)
-        $(`tr:last-child .cell`).on("click", editCell);
+        $(`tr:last-child .cell`).on("click", function() {editCell($(this), data)});
         $(`tr:last-child .student-name`).attr("tabindex", 0)
             .on("click", () => selectRow(i, data))
             .on("blur", deselectAll);
@@ -93,7 +93,10 @@ function updateSummary() {
 
 }
 
-function updateCell(cell, newValue, originalValue) {
+function updateCell(cell, newValue, originalValue, data) {
+    const colIndex = cell.attr('class').split(' ')[0].split('col-')[1];
+    const rowIndex = cell.attr('class').split(' ')[1].split('row-')[1];
+
     if (!isEditing) return;
     if (/^\d+(?:\.+\d*)?$/.test(newValue) &&
         newValue.length > 0 &&
@@ -101,6 +104,7 @@ function updateCell(cell, newValue, originalValue) {
         newValue !== originalValue
     ) {
         cell.text(parseFloat(newValue));
+        data.grades[rowIndex][colIndex] = newValue;
     } else {
         cell.text(originalValue);
     }
@@ -110,6 +114,7 @@ function updateCell(cell, newValue, originalValue) {
         buildNewGraph("Letter Grade", "Frequency", readSelectedData());
     }
 
+    console.log(data);
     removeInput();
 }
 
@@ -118,16 +123,15 @@ function removeInput() {
     isEditing = false;
 }
 
-function editCell() {
+function editCell(cell, data) {
     if (isEditing) return;
     isEditing = true;
-    const cell = $(this);
     const originalValue = cell.text();
     const input = $("<input type='tel' id='edit-input'>")
         .val(originalValue)
-        .on("blur", function() { updateCell(cell, this.value.trim(), originalValue); })
+        .on("blur", function() { updateCell(cell, this.value.trim(), originalValue, data); })
         .on("keydown", function(e) {
-            if (e.key === "Enter") updateCell(cell, this.value.trim(), originalValue);
+            if (e.key === "Enter") updateCell(cell, this.value.trim(), originalValue, data);
         })
         .appendTo(cell)
         .focus();
@@ -135,4 +139,5 @@ function editCell() {
 
 
 
-// TODO: chart doesn't update on window resize
+// Issue(s)
+// - chart doesn't update on window resize
