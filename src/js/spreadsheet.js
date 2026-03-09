@@ -52,6 +52,7 @@ function deselectAll() {
     selectedName = null;
     $(".selected").removeClass("selected");
     removeInput();
+    $("#no-data-message").removeClass("none");
     d3.select("#chart").selectAll("*").remove();
 }
 
@@ -63,6 +64,7 @@ function selectRow(rowId, data) {
     selectedName = data.students[rowId];
     updateSummary("Row", data.students[rowId]);
     buildNewGraph("Letter Grade", "Frequency", readSelectedData());
+    $("#no-data-message").addClass("none");
 }
 
 function selectColumn(colId, data) {
@@ -72,6 +74,7 @@ function selectColumn(colId, data) {
     selectedName = data.headers[colId + 1];
     updateSummary();
     buildNewGraph("Letter Grade", "Frequency", readSelectedData());
+    $("#no-data-message").addClass("none");
 }
 
 function updateSummary() {

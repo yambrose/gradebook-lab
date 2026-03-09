@@ -114,7 +114,12 @@ td {
     background: #dfdfdf;
 }
 
-/* Graph */
+/* Chart */
+
+#chart-section {
+    position: relative;
+}
+
 #chart {
     width: 100%;
     height: 350px;
@@ -130,6 +135,17 @@ td {
 .axis text {
     font-size: 0.75rem;
     fill: #333333;
+}
+
+#no-data-message {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.none {
+    display: none;
 }
 
 
