@@ -1,7 +1,6 @@
 // src/js/spreadsheet.js
 // DOM generation + jQuery interactivity + editing + summary updates
 
-
 const table = $("#grades-table");
 const tableBody = $("#table-body");
 
